@@ -4,7 +4,12 @@
 import './App.css';
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
+/* import dotenv from 'dotenv'
+dotenv.config() */
+require('dotenv').config()
 
+const api_key = process.env.REACT_APP_API_KEY
+console.log(process.env.REACT_APP_API_KEY)
 const Display = ({weather}) => {
   return (
     <div style={{border:'18px solid cyan', width:'30%', margin:'auto 6px', borderRadius:'2em', display:'inline-block'}}>
@@ -41,7 +46,7 @@ function App() {
         mode: 'xml, html'
       },
       headers: {
-        'x-rapidapi-key': '522f18392emsh07b4ad84f55c4d8p171de2jsnf2c31127d192',
+        'x-rapidapi-key': api_key,
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
       }
     };
@@ -70,7 +75,7 @@ function App() {
           mode: 'xml, html'
         },
         headers: {
-          'x-rapidapi-key': '522f18392emsh07b4ad84f55c4d8p171de2jsnf2c31127d192',
+          'x-rapidapi-key': api_key,
           'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
         }
       };
