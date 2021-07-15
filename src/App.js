@@ -9,10 +9,10 @@ dotenv.config() */
 require('dotenv').config()
 
 const api_key = process.env.REACT_APP_API_KEY
-console.log(process.env.REACT_APP_API_KEY)
+
 const Display = ({weather}) => {
   return (
-    <div style={{border:'18px solid cyan', width:'30%', margin:'auto 6px', borderRadius:'2em', display:'inline-block'}}>
+    <div className='DisplayComponent'>
       <h4>{weather.name}</h4>
       <h6>{weather.sys.country}</h6>
       <p>{weather.main.temp} °C , {weather.weather[0].description}</p>
