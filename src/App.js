@@ -7,7 +7,7 @@ import axios from 'axios'
 
 const Display = ({weather}) => {
   return (
-    <div style={{border:'3px solid cyan', width:'30%', margin:'auto 6px', borderRadius:'2em', display:'inline-block'}}>
+    <div style={{border:'18px solid cyan', width:'30%', margin:'auto 6px', borderRadius:'2em', display:'inline-block'}}>
       <h4>{weather.name}</h4>
       <h6>{weather.sys.country}</h6>
       <p>{weather.main.temp} °C , {weather.weather[0].description}</p>
