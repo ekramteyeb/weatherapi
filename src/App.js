@@ -28,13 +28,11 @@ function App() {
 
   useEffect(() => {
     
-    var axios = require("axios").default;
-
     var options = {
       method: 'GET',
       url: 'https://community-open-weather-map.p.rapidapi.com/weather',
       params: {
-        q: 'Helsinki,Finland',
+        q: 'Helsinki',
         lat: '0',
         lon: '0',
         id: '2172797',
@@ -58,9 +56,32 @@ function App() {
   }, [])
 
   useEffect(() => {
-      if(search !== '')
-      axios.get(`http://api.weatherstack.com/current?access_key=0eb359255fcd0e26c9084ad71e7ef14b&query=${search}`) 
-      .then(response => setWeather(response.data))
+      if(search !== ''){
+      var options = {
+        method: 'GET',
+        url: 'https://community-open-weather-map.p.rapidapi.com/weather',
+        params: {
+          q: search,
+          lat: '0',
+          lon: '0',
+          id: '2172797',
+          lang: 'null',
+          units: 'metric',
+          mode: 'xml, html'
+        },
+        headers: {
+          'x-rapidapi-key': '522f18392emsh07b4ad84f55c4d8p171de2jsnf2c31127d192',
+          'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
+        }
+      };
+
+    axios.request(options).then(function (response) {
+        console.log(response.data);
+        setWeather(response.data)
+    }).catch(function (error) {
+      console.error(error);
+    });
+  }
     
   }, [search])
 
@@ -76,7 +97,7 @@ function App() {
         <br/>
         <p>Local weather</p>
         {localWeather ? <Display weather={localWeather} /> : 'nothing to display'}
-       {/*  {weather ? <Display weather={weather} /> : ''}  */}
+        {weather ? <Display weather={weather} /> : ''} 
         
         {console.log(localWeather)}
         {console.log(weather)}
