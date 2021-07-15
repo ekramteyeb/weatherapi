@@ -1,4 +1,4 @@
-// resource used from RapidApi weather  api 
+// resource used from weather-stack api 
 
 //import logo from './logo.svg';
 import './App.css';
@@ -8,13 +8,12 @@ import axios from 'axios'
 const Display = ({weather}) => {
   return (
     <div style={{border:'3px solid cyan', width:'30%', margin:'auto 6px', borderRadius:'2em', display:'inline-block'}}>
-      <h4>{weather.name}</h4>
-      <h6>{weather.sys.country}</h6>
-      <p>{weather.main.temp} °C , {weather.weather[0].description}</p>
-      <p>Feels like : {weather.main.feels_like} °C</p>
-{/*       <p>{weather.current.is_day === 'yes' ? 'Day time' : 'Night time'}</p>
- */}   <p> <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt='weather-icons'/></p>
-        
+      <h4>{weather.location.country}</h4>
+      <h6>{weather.location.name}</h6>
+      <p>{weather.current.temperature} °C , {weather.current.weather_descriptions}</p>
+      <p>Feels like : {weather.current.feelslike} °C</p>
+      <p>{weather.current.is_day === 'yes' ? 'Day time' : 'Night time'}</p>
+      <p> <img src={weather.current.weather_icons} alt='weather-icons'/></p>
     </div>
   )
 }
@@ -28,32 +27,8 @@ function App() {
 
   useEffect(() => {
     
-    var axios = require("axios").default;
-
-    var options = {
-      method: 'GET',
-      url: 'https://community-open-weather-map.p.rapidapi.com/weather',
-      params: {
-        q: 'Helsinki,Finland',
-        lat: '0',
-        lon: '0',
-        id: '2172797',
-        lang: 'null',
-        units: 'metric',
-        mode: 'xml, html'
-      },
-      headers: {
-        'x-rapidapi-key': '522f18392emsh07b4ad84f55c4d8p171de2jsnf2c31127d192',
-        'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
-      }
-    };
-
-    axios.request(options).then(function (response) {
-        console.log(response.data);
-        setLocalWeather(response.data)
-    }).catch(function (error) {
-      console.error(error);
-    });
+      axios.get(`http://api.weatherstack.com/current?access_key=0eb359255fcd0e26c9084ad71e7ef14b&query=fetch:ip`) 
+      .then(response => setLocalWeather(response.data))
     
   }, [])
 
@@ -76,9 +51,9 @@ function App() {
         <br/>
         <p>Local weather</p>
         {localWeather ? <Display weather={localWeather} /> : 'nothing to display'}
-       {/*  {weather ? <Display weather={weather} /> : ''}  */}
+        {weather ? <Display weather={weather} /> : ''}
         
-        {console.log(localWeather)}
+        
         {console.log(weather)}
       </header>
     </div>
