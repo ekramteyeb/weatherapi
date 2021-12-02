@@ -101,8 +101,9 @@ function App() {
         </form>
         <br/>
         <p>Local weather</p>
-        {localWeather ? <Display weather={localWeather} /> : 'nothing to display'}
         {weather ? <Display weather={weather} /> : ''} 
+        {localWeather ? <Display weather={localWeather} /> : 'nothing to display'}
+       
         
         {console.log(localWeather)}
         {console.log(weather)}
