@@ -50,7 +50,7 @@ function App() {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
       }
     }; */
-    axios.get(`http://api.openweathermap.org/data/2.5/weather?q=helsinki&appid=${api_key}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=helsinki&appid=${api_key}`)
     .then(function (response) {
         console.log(response.data);
         setLocalWeather(response.data)
@@ -83,7 +83,7 @@ function App() {
     /* axios.request(options).then(function (response) {
         console.log(response.data);
         setWeather(response.data) */
-      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${api_key}`)
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${api_key}`)
       .then(function(response) {
         setWeather(response.data)
       })
