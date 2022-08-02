@@ -13,7 +13,7 @@ const api_key = process.env.REACT_APP_API_KEY
 const Display = ({weather}) => {
   return (
     <div className='DisplayComponent'>
-      <h4>{weather.name}</h4>
+      <h4>{weather.name} </h4>
       <h6>{weather.sys.country}</h6>
       <p>{Math.floor(weather.main.temp - 273.13)} °C , {weather.weather[0].description}</p>
       <p>Feels like : {Math.floor(weather.main.feels_like - 273.13)} °C</p>
