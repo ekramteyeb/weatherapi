@@ -8,7 +8,7 @@ import axios from 'axios'
 dotenv.config() */
 require('dotenv').config()
 
-const api_key = process.env.REACT_APP_API_KEY
+
 
 const Display = ({weather}) => {
   return (
@@ -25,7 +25,7 @@ const Display = ({weather}) => {
 }
 
 function App() {
- 
+  const api_key = process.env.REACT_APP_API_KEY;
   const [weather, setWeather] = useState('');
   const [localWeather, setLocalWeather] = useState('');
   const [search, setSearch] = useState('');
@@ -58,13 +58,13 @@ function App() {
       console.error(error);
     });
     
-  }, [])
+  }, [api_key])
 
   useEffect(() => {
       if(search !== ''){
-     /*  var options = {
+     /* var options = {
         method: 'GET',
-        url: 'https://community-open-weather-map.p.rapidapi.com/weather',
+        url: 'https://api.openweathermap.org/data/2.5/weather',
         params: {
           q: search,
           lat: '0',
@@ -78,8 +78,8 @@ function App() {
           'x-rapidapi-key': api_key,
           'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
         }
-      };
- */
+      }; */
+ 
     /* axios.request(options).then(function (response) {
         console.log(response.data);
         setWeather(response.data) */
@@ -92,10 +92,10 @@ function App() {
     });
   }
     
-  }, [search])
+  }, [search, api_key])
 
   return (
-    <div className="App">
+    <div className="App-header">
       <header className="App">
         <h1>Weather API</h1>
         <p>Enter a city or country</p>
@@ -105,12 +105,10 @@ function App() {
         </form>
         <br/>
         <p>Local weather</p>
+        <div className='App-content'>
         {weather ? <Display weather={weather} /> : ''} 
         {localWeather ? <Display weather={localWeather} /> : 'nothing to display'}
-       
-        
-        {console.log(localWeather)}
-        {console.log(weather)}
+        </div>
       </header>
     </div>
   );

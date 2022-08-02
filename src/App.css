@@ -1,20 +1,19 @@
 .App {
   text-align: center;
   font-size: large;
-  color: purple;
   width:100%;
 }
 .DisplayComponent{
  
-  border: 18px solid cyan;
-  width:30%;
+  border: 2px solid cyan;
+  width:26%;
   margin:auto 6px;
-  border-radius:2em;
+  border-radius:0.6em;
   display:inline-block;
   
 }
 .App-logo {
-  height: 40vmin;
+  height: 50vmin;
   pointer-events: none;
 }
 
@@ -27,14 +26,16 @@
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  font-size: calc(1px + 2vmin);
   color: white;
+  border:solid white;
 }
-
+.App-content{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
 .App-link {
   color: #61dafb;
 }
