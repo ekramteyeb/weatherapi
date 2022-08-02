@@ -15,8 +15,8 @@ const Display = ({weather}) => {
     <div className='DisplayComponent'>
       <h4>{weather.name}</h4>
       <h6>{weather.sys.country}</h6>
-      <p>{weather.main.temp} °C , {weather.weather[0].description}</p>
-      <p>Feels like : {weather.main.feels_like} °C</p>
+      <p>{Math.floor(weather.main.temp - 273.13)} °C , {weather.weather[0].description}</p>
+      <p>Feels like : {Math.floor(weather.main.feels_like - 273.13)} °C</p>
 {/*       <p>{weather.current.is_day === 'yes' ? 'Day time' : 'Night time'}</p>
  */}   <p> <img src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`} alt='weather-icons'/></p>
         
@@ -33,7 +33,7 @@ function App() {
 
   useEffect(() => {
     
-    var options = {
+    /* var options = {
       method: 'GET',
       url: 'https://community-open-weather-map.p.rapidapi.com/weather',
       params: {
@@ -49,9 +49,9 @@ function App() {
         'x-rapidapi-key': api_key,
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
       }
-    };
-
-    axios.request(options).then(function (response) {
+    }; */
+    axios.get(`http://api.openweathermap.org/data/2.5/weather?q=helsinki&appid=${api_key}`)
+    .then(function (response) {
         console.log(response.data);
         setLocalWeather(response.data)
     }).catch(function (error) {
@@ -62,7 +62,7 @@ function App() {
 
   useEffect(() => {
       if(search !== ''){
-      var options = {
+     /*  var options = {
         method: 'GET',
         url: 'https://community-open-weather-map.p.rapidapi.com/weather',
         params: {
@@ -79,11 +79,15 @@ function App() {
           'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
         }
       };
-
-    axios.request(options).then(function (response) {
+ */
+    /* axios.request(options).then(function (response) {
         console.log(response.data);
+        setWeather(response.data) */
+      axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${api_key}`)
+      .then(function(response) {
         setWeather(response.data)
-    }).catch(function (error) {
+      })
+     .catch(function (error) {
       console.error(error);
     });
   }
