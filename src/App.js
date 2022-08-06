@@ -31,6 +31,9 @@ function App() {
   const [search, setSearch] = useState('');
   const [text, setText] = useState('');
 
+
+  console.log(api_key, 'new weye')
+
   useEffect(() => {
     
     /* var options = {
@@ -83,6 +86,7 @@ function App() {
     /* axios.request(options).then(function (response) {
         console.log(response.data);
         setWeather(response.data) */
+      //axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${api_key}`)
       axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${api_key}`)
       .then(function(response) {
         setWeather(response.data)
@@ -98,7 +102,7 @@ function App() {
     <div className="App-header">
       <header className="App">
         <h1>Weather API</h1>
-        <p>Enter a city or country</p>
+        <p>Enter a city or country ,</p>
         <form onSubmit={(e) => e.preventDefault()}>
           <input type='text' onChange={(e) => setText(e.target.value)}/><br/><br/>
           <input type='submit' onClick={() => setSearch(text)} value='submit'/>
