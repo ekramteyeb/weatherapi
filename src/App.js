@@ -25,14 +25,11 @@ const Display = ({weather}) => {
 }
 
 function App() {
-  const api_key = process.env.REACT_APP_API_KEY;
+  const kulf = process.env.REACT_APP_API_KEY;
   const [weather, setWeather] = useState('');
   const [localWeather, setLocalWeather] = useState('');
   const [search, setSearch] = useState('');
   const [text, setText] = useState('');
-
-
-  console.log(api_key, 'new weye')
 
   useEffect(() => {
     
@@ -53,7 +50,7 @@ function App() {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
       }
     }; */
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=helsinki&appid=${api_key}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=helsinki&appid=${kulf}`)
     .then(function (response) {
         console.log(response.data);
         setLocalWeather(response.data)
@@ -61,7 +58,7 @@ function App() {
       console.error(error);
     });
     
-  }, [api_key])
+  }, [kulf])
 
   useEffect(() => {
       if(search !== ''){
@@ -87,7 +84,7 @@ function App() {
         console.log(response.data);
         setWeather(response.data) */
       //axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${api_key}`)
-      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${api_key}`)
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${kulf}`)
       .then(function(response) {
         setWeather(response.data)
       })
@@ -96,7 +93,7 @@ function App() {
     });
   }
     
-  }, [search, api_key])
+  }, [search, kulf])
 
   return (
     <div className="App-header">
