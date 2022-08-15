@@ -30,6 +30,7 @@ function App() {
   const [localWeather, setLocalWeather] = useState('');
   const [search, setSearch] = useState('');
   const [text, setText] = useState('');
+  const [message, setMessage] = useState(null);
   const [lat , setLat] = useState(null)
   const [lon , setLon] = useState(null)
 
@@ -44,7 +45,8 @@ function App() {
     /* document.getElementById('startLat').innerHTML = startPos.coords.latitude;
     document.getElementById('startLon').innerHTML = startPos.coords.longitude; */
   };
-  var geoError = function (error) {
+    var geoError = function (error) {
+    setMessage('Error occured . Error code' + error.code)
     console.log('Error occurred. Error code: ' + error.code);
     // error.code can be:
     //   0: unknown error
@@ -75,14 +77,18 @@ function App() {
       }
     }; */
     //axios.get(`https://api.openweathermap.org/data/2.5/weather?q=helsinki&appid=${kulf}`)
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${kulf}`)
-    .then(function (response) {
+    if (lat && lon) {
+      axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${kulf}`)
+      .then(function (response) {
         console.log(response.data);
-      setLocalWeather(response.data)
-      
-    }).catch(function (error) {
-      console.error(error);
-    });
+        setLocalWeather(response.data)
+        setMessage(null);
+      }).catch(function (error) {
+        console.error(error);
+      });
+    } else {
+      setMessage('Loading.....')
+    }
     
   }, [kulf,lon,lat])
 
@@ -125,18 +131,16 @@ function App() {
   return (
     <div className="App-header">
       <header className="App">
-        <p>{lat}</p>
         <h1>Weather API</h1>
         <p>Enter a city or country ,</p>
         <form onSubmit={(e) => e.preventDefault()}>
           <input type='text' onChange={(e) => setText(e.target.value)}/><br/><br/>
           <input type='submit' onClick={() => setSearch(text)} value='submit'/>
         </form>
-        <br/>
         <p>Local weather</p>
         <div className='App-content'>
         {weather ? <Display weather={weather} /> : ''} 
-        {localWeather ? <Display weather={localWeather} /> : 'nothing to display'}
+        {localWeather ? <Display weather={localWeather} /> : <p >{ message}</p> }
         </div>
       </header>
     </div>
