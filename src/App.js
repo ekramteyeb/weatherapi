@@ -133,11 +133,13 @@ function App() {
       <header className="App">
         <h1>Weather API</h1>
         <p>Enter a city or country ,</p>
+        
         <form onSubmit={(e) => e.preventDefault()}>
           <input type='text' onChange={(e) => setText(e.target.value)}/><br/><br/>
           <input type='submit' onClick={() => setSearch(text)} value='submit'/>
         </form>
         <p>Local weather</p>
+        <small>{ new Date().toLocaleString()}</small>
         <div className='App-content'>
         {weather ? <Display weather={weather} /> : ''} 
         {localWeather ? <Display weather={localWeather} /> : <p >{ message}</p> }

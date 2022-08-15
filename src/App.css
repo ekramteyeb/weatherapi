@@ -5,10 +5,10 @@
 }
 .DisplayComponent{
  
-  border: 2px solid cyan;
+  border: 0.5px solid cyan;
   width:26%;
   margin:auto 6px;
-  border-radius:0.6em;
+  border-radius:0.8em;
   display:inline-block;
   
 }
