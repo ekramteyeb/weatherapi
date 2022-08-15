@@ -30,6 +30,30 @@ function App() {
   const [localWeather, setLocalWeather] = useState('');
   const [search, setSearch] = useState('');
   const [text, setText] = useState('');
+  const [lat , setLat] = useState(null)
+  const [lon , setLon] = useState(null)
+
+  window.onload = function () {
+  var startPos;
+  var geoSuccess = function (position) {
+    startPos = position;
+    setLat(startPos.coords.latitude)
+    setLon(startPos.coords.longitude)
+    console.log(startPos.coords.latitude, 'lattitude')
+    console.log(startPos.coords.longitude, 'longitude')
+    /* document.getElementById('startLat').innerHTML = startPos.coords.latitude;
+    document.getElementById('startLon').innerHTML = startPos.coords.longitude; */
+  };
+  var geoError = function (error) {
+    console.log('Error occurred. Error code: ' + error.code);
+    // error.code can be:
+    //   0: unknown error
+    //   1: permission denied
+    //   2: position unavailable (error response from location provider)
+    //   3: timed out
+  };
+  navigator.geolocation.getCurrentPosition(geoSuccess, geoError);
+  }
 
   useEffect(() => {
     
@@ -50,15 +74,17 @@ function App() {
         'x-rapidapi-host': 'community-open-weather-map.p.rapidapi.com'
       }
     }; */
-    axios.get(`https://api.openweathermap.org/data/2.5/weather?q=helsinki&appid=${kulf}`)
+    //axios.get(`https://api.openweathermap.org/data/2.5/weather?q=helsinki&appid=${kulf}`)
+    axios.get(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${kulf}`)
     .then(function (response) {
         console.log(response.data);
-        setLocalWeather(response.data)
+      setLocalWeather(response.data)
+      
     }).catch(function (error) {
       console.error(error);
     });
     
-  }, [kulf])
+  }, [kulf,lon,lat])
 
   useEffect(() => {
       if(search !== ''){
@@ -84,6 +110,7 @@ function App() {
         console.log(response.data);
         setWeather(response.data) */
       //axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${api_key}`)
+      //axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${kulf}`)
       axios.get(`https://api.openweathermap.org/data/2.5/weather?q=${search}&appid=${kulf}`)
       .then(function(response) {
         setWeather(response.data)
@@ -98,6 +125,7 @@ function App() {
   return (
     <div className="App-header">
       <header className="App">
+        <p>{lat}</p>
         <h1>Weather API</h1>
         <p>Enter a city or country ,</p>
         <form onSubmit={(e) => e.preventDefault()}>
