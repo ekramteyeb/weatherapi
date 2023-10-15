@@ -3,13 +3,23 @@
   font-size: small;
   width:100%;
 }
+p{
+  font-size: large;
+  padding:0;
+  margin:0;
+}
+
 .DisplayComponent{
  
-  border: 0.5px solid cyan;
-  width:26%;
+  border-left: 8px solid cyan;
+  border-top: 4px solid cyan;
+  border-bottom: 4px solid cyan;
+  border-right: 1px solid cyan;
+  width:39%;
   margin:auto 6px;
   border-radius:0.8em;
   display:inline-block;
+ 
   
 }
 .App-logo {
@@ -27,7 +37,7 @@
   background-color: #282c34;
   min-height: 100vh;
   font-size: calc(1px + 1vmin);
-  color: gray;
+  color: white;
   border:solid white;
 }
 .App-content{
@@ -35,6 +45,7 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  margin-top:30px;
 }
 .App-link {
   color: #61dafb;

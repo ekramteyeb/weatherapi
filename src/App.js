@@ -6,15 +6,15 @@ import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 /* import dotenv from 'dotenv'
 dotenv.config() */
-require('dotenv').config()
+//require('dotenv').config()
 
 
 
 const Display = ({weather}) => {
   return (
     <div className='DisplayComponent'>
-      <h4>{weather.name} </h4>
-      <h6>{weather.sys.country}</h6>
+      <h2>{weather.name} </h2>
+      <h3>{weather.sys.country}</h3>
       <p>{Math.floor(weather.main.temp - 273.13)} °C , {weather.weather[0].description}</p>
       <p>Feels like : {Math.floor(weather.main.feels_like - 273.13)} °C</p>
 {/*       <p>{weather.current.is_day === 'yes' ? 'Day time' : 'Night time'}</p>
@@ -46,8 +46,8 @@ function App() {
     document.getElementById('startLon').innerHTML = startPos.coords.longitude; */
   };
     var geoError = function (error) {
-    setMessage('Error occured . Error code' + error.code)
-    console.log('Error occurred. Error code: ' + error.code);
+    setMessage('App needs to access your location to lookfor local weather info')
+    //console.log('Error occurred. Error code: ' + error.code);
     // error.code can be:
     //   0: unknown error
     //   1: permission denied
@@ -132,14 +132,16 @@ function App() {
     <div className="App-header">
       <header className="App">
         <h1>Weather API</h1>
-        <p>Enter a city or country ,</p>
+        <p>Enter a city/country </p>
         
-        <form onSubmit={(e) => e.preventDefault()}>
-          <input type='text' onChange={(e) => setText(e.target.value)}/><br/><br/>
-          <input type='submit' onClick={() => setSearch(text)} value='submit'/>
+        <form  onSubmit={(e) => e.preventDefault()}>
+          <input style={{ padding:'6px 10px' }} type='text' onChange={(e) => setText(e.target.value)}/><br/><br/>
+          <input style={{ padding:'6px 10px', borderRadius:'8px' }} type='submit' onClick={() => setSearch(text)} value='Submit'/>
         </form>
-        <p>Local weather</p>
-        <small>{ new Date().toLocaleString()}</small>
+        <div style={{ margin:'10px' }}>
+            <p>Local weather</p>
+            <small>{ new Date().toLocaleString()}</small>
+        </div>
         <div className='App-content'>
         {weather ? <Display weather={weather} /> : ''} 
         {localWeather ? <Display weather={localWeather} /> : <p >{ message}</p> }
